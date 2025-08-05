@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhinav Pandey - Portfolio</title>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts for Roboto Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- ScrollReveal for animations -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto Mono', monospace, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #141e30, #243b55);
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Canvas for Matrix Rain */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.25;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(20, 30, 48, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 255, 231, 0.2);
+        }
+
+        .navbar-brand {
+            color: #00ffe7;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: #00ffe7;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.7);
+        }
+
+        /* Home Section */
+        #home-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+  
+
+        }
+
+        #home-image img {
+            width: 370px;
+            height: 450px;
+            transform: rotateY(-10deg) rotateX(5deg);
+            box-shadow: 0 30px 40px rgba(0, 255, 231, 0.3);
+            border-radius: 20px;
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+        #home-image img:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+            box-shadow: 0 40px 60px rgba(0, 255, 231, 0.4);   
+        }
+
+        .typing {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #00ffe7;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #00ffe7;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 55% }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent }
+        }
+
+
+
+
+        
+
+  
+        
+        /* Skills Section */
+        .skills-section {
+            padding: 5rem 2rem;
+            background: rgba(20, 30, 48, 0.8);
+            color: #fff;
+            text-align: center;
+        }
+
+        .skills-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #00ffe7;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 5rem;
+            max-width: 1500px;
+            margin: auto;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 6px 16px rgba(0, 255, 231, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 255, 231, 0.4);
+        }
+
+        .skill-item i {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            color: #00ffe7;
+        }
+
+        .skill-item span {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+        }
+     
+        /* Projects Section */
+        .project-section {
+            padding: 5rem 2rem;
+            background: rgba(20, 30, 48, 0.8);
+            text-align: center;
+        }
+
+        .project-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #00ffe7;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, #141e30, #243b55);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 255, 231, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 255, 231, 0.3);
+        }
+
+        .project-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #00ffe7;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .btn-view {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #00ffe7;
+            color: #000;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-view:hover {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 255, 231, 0.7);
+        }
+
+        /* Certificates Section */
+        .certificates-section {
+            padding: 5rem 2rem;
+            background: rgba(20, 30, 48, 0.8);
+            text-align: center;
+        }
+
+        .certificates-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #00ffe7;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .cert-card {
+            background: linear-gradient(145deg, #141e30, #243b55);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 255, 231, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 255, 231, 0.3);
+        }
+
+        .cert-card i {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            color: #00ffe7;
+        }
+
+        .cert-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #00ffe7;
+        }
+
+        .cert-card p {
+            font-size: 0.95rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .cert-button {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #00ffe7;
+            color: #000;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cert-button:hover {
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 255, 231, 0.7);
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 5rem 2rem;
+            background: rgba(20, 30, 48, 0.8);
+            text-align: center;
+        }
+
+        #contact h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #00ffe7;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .contact-card {
+            background: linear-gradient(145deg, #141e30, #243b55);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 255, 231, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 255, 231, 0.3);
+        }
+
+        .contact-card img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #00ffe7;
+        }
+
+        .contact-card a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: #00ffe7;
+            text-decoration: underline;
+        }
+
+        /* Get in Touch Section */
+        .get-in-touch-section {
+            padding: 5rem 2rem;
+            background: rgba(20, 30, 48, 0.8);
+            text-align: center;
+        }
+
+        .get-in-touch-section h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #00ffe7;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        .get-in-touch-form {
+            max-width: 600px;
+            margin: auto;
+            display: grid;
+            gap: 1rem;
+            background: rgba(0, 255, 231, 0.2);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 255, 231, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .get-in-touch-form input,
+        .get-in-touch-form textarea {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+
+        .get-in-touch-form input:focus,
+        .get-in-touch-form textarea:focus {
+            border-color: black;
+            box-shadow: 0 0 10px rgba(0, 255, 231, 0.5);
+        }
+
+        .get-in-touch-form textarea {
+            resize: vertical;
+            min-height: 100px;
+            grid-column: 1 / -1;
+        }
+
+        .get-in-touch-form button {
+            padding: 0.75rem;
+            background: darkkhaki;
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+            grid-column: 1 / -1;
+        }
+
+        .get-in-touch-form button:hover {
+            background: darkkhaki;
+            box-shadow: 0 0 10px rgba(0, 255, 231, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(20, 30, 48, 0.9);
+            color: #d1d5db;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #00ffe7;
+            text-decoration: none;
+            margin: 0 0.8rem;
+            font-weight: 600;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 255, 231, 0.7);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #00ffe7;
+            color: #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            box-shadow: 0 0 10px rgba(0, 255, 231, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #home .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            #home-image img {
+                width: 250px;
+                height: 300px;
+            }
+
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-img {
+                max-width: 200px;
+                height: 200px;
+            }
+
+            .skills-container {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .navbar-links {
+                gap: 1rem;
+            }
+
+            .navbar-links a {
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            #home-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .typing {
+                font-size: 1.5rem;
+            }
+
+            #home-text p {
+                font-size: 1rem;
+            }
+
+            #home-text button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Portfolio Content -->
+    <div class="portfolio-content" id="portfolio-content">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <a href="#home" class="navbar-brand">Portfolio</a>
+            <div class="navbar-links">
+                <a href="#home">Home</a>
+                <a href="#about">About Me</a>
+                <a href="#certificates">Certificates</a>
+            </div>
+        </nav>
+
+        <!-- Home Section -->
+        <section id="home" class="min-h-screen pt-3 pb-3 px-2 flex items-center">
+            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+                <!-- Home Text Content -->
+                <div class="space-y-2" id="home-text">
+                    <h2 class="typing">Hi, I'm Abhinav <br>Welcome to my portfolio</h2>
+                    <h1 class="text-2xl md:text-3xl font-semibold text-cyan-400">Web Developer & AI Enthusiast</h1>
+                    <p class="text-xl text-gray-300">Passionate about crafting responsive websites and leveraging AI to solve real-world problems.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <button onclick="document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })" class="bg-cyan-500 text-xl text-black px-4 py-2 rounded hover:bg-white hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">View Skills</button>
+                        <button onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })" class="bg-gray-700 text-xl text-white px-4 py-2 rounded hover:bg-white hover:text-black hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">View Projects</button>
+                    </div>
+                </div>
+                    <!-- Home Image -->
+                <div id="home-image">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFJ23yP0L0S8g/profile-displayphoto-scale_200_200/B56Zhvae9IHQAY-/0/1754215870903?e=1757548800&v=beta&t=N8rJrnWLNJ6gazM3x5U9b2DWtLgIWhy_jFOzOnFKieo" 
+                    alt="Abhinav Pandey">
+                </div>
+            </div>
+         </section>
+
+          
+        
+          
+         <!-- about section -->
+           <section class="about-section" id="about">
+    <div class="about-container">
+        <div class="about-image">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQFJ23yP0L0S8g/profile-displayphoto-scale_200_200/B56Zhvae9IHQAY-/0/1754215870903?e=1756944000&v=beta&t=YfpyIeU1ARYtHLASsmkDnlVosBS7exKI1i0XJwHnzT4" alt="Abhinav Pandey">
+        </div>
+        <div class="about-content">
+            <h2 class="animated-text">About Me</h2>
+            <p class="animated-text">I'm Abhinav Pandey, a passionate developer with a knack for creating innovative solutions. With expertise in web development and a love for clean code, I build projects that blend functionality with aesthetic appeal. Connect with me to explore my work or collaborate on exciting ideas!</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.about-section {
+  padding: 50px 20px;
+  background:  rgba(0, 0, 0, 0.2);
+  color: #e0e0e0;
+  font-family: 'Roboto Mono', monospace;
+  text-align: center;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-image img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00ff88;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+  opacity: 0;
+  transition: opacity 0.8s ease, box-shadow 0.3s ease;
+}
+
+.about-image img.visible {
+  opacity: 1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.about-image img:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.about-content {
+  max-width: 600px;
+  text-align: left;
+}
+
+.about-content h2 {
+  font-size: 2.2rem;
+  color: #00ff88;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 2;
+   color: #c0c0c0;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.animated-text span {
+  opacity: 0;
+  display: inline-block;
+  transition: opacity 0.3s ease;
+}
+
+.animated-text span.visible {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-image img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .about-content {
+    text-align: center;
+  }
+
+  .about-content p {
+    font-size: 1rem;
+    padding: 15px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Split text into spans for letter-by-letter animation
+  const textElements = document.querySelectorAll('.animated-text');
+  textElements.forEach(element => {
+    const text = element.textContent;
+    element.textContent = '';
+    text.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      element.appendChild(span);
+    });
+  });
+
+  // Intersection Observer for animations
+  const aboutSection = document.querySelector('.about-section');
+  const image = document.querySelector('.about-image img');
+  const spans = document.querySelectorAll('.animated-text span');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Image pulse animation
+        image.classList.add('visible');
+
+        // Text letter-by-letter fade-in
+        spans.forEach((span, index) => {
+          setTimeout(() => {
+            span.classList.add('visible');
+          }, index * 50);
+        });
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(aboutSection);
+
+  // Image tilt effect
+  image.addEventListener('mousemove', (e) => {
+    const rect = image.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const tiltX = (y / rect.height) * 20;
+    const tiltY = -(x / rect.width) * 20;
+    image.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.05)`;
+  });
+
+  image.addEventListener('mouseleave', () => {
+    image.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+    image.classList.add('visible'); // Ensure pulse animation continues
+  });
+});
+</script>
+
+
+        <!-- Skills Section -->
+        <section class="skills-section" id="skills">
+            <h2>My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <i class="fab fa-html5"></i>
+                    <span>HTML5</span>
+                    <button onclick="window.open('https://roadmap.sh/frontend', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #e44d26; color: white; border: none; border-radius: 4px; cursor: pointer;">Read HTML</button>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <span>CSS3</span>
+                    <button onclick="window.open('https://roadmap.sh/frontend', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #2965f1; color: white; border: none; border-radius: 4px; cursor: pointer;">Read CSS</button>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-js-square"></i>
+                    <span>JavaScript</span>
+                    <button onclick="window.open('https://roadmap.sh/javascript', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #f0db4f; color: black; border: none; border-radius: 4px; cursor: pointer;">Read JS</button>
+                </div>
+                <div class="skill-item">
+                    <i class="fab fa-python"></i>
+                    <span>Python</span>
+                    <button onclick="window.open('https://roadmap.sh/python', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #3776ab; color: white; border: none; border-radius: 4px; cursor: pointer;">Read Python</button>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-database"></i>
+                    <span>MySQL</span>
+                    <button onclick="window.open('https://roadmap.sh/sql', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #00618a; color: white; border: none; border-radius: 4px; cursor: pointer;">Read SQL</button>
+                </div>
+                <div class="skill-item">
+                    <i class="fas fa-robot"></i>
+                    <span>Machine Learning</span>
+                    <button onclick="window.open('https://roadmap.sh/ai', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer;">Read ML</button>
+                </div>
+            </div>
+ </section>
+
+ 
+ <section class="social-section" id="social">
+    
+    <div class="social-container">
+      <div class="social-scroller">
+        <div class="social-item" data-url="https://www.amazon.com">
+          <i class="fab fa-amazon"></i>
+          <span>Amazon</span>
+           
+        </div>
+        <div class="social-item" data-url="https://www.microsoft.com">
+          <i class="fab fa-microsoft"></i>
+          <span>Microsoft</span>
+          
+        </div>
+        <div class="social-item" data-url="https://www.facebook.com">
+          <i class="fab fa-facebook"></i>
+          <span>Facebook</span>
+           
+        </div>
+        <div class="social-item" data-url="https://x.com">
+          <i class="fab fa-x-twitter"></i>
+          <span>Twitter</span>
+          
+        </div>
+        <div class="social-item" data-url="https://linkedin.com/in/abhinav-pandey-b499532b5">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+          
+        </div>
+        <div class="social-item" data-url="https://github.com/Abhinav1901498">
+          <i class="fab fa-github"></i>
+          <span>GitHub</span>
+         
+        </div>
+        <div class="social-item" data-url="https://t.me/abhinav1901498">
+          <i class="fab fa-telegram"></i>
+          <span>Telegram</span>
+          
+        </div>
+        <div class="social-item" data-url="https://www.instagram.com">
+          <i class="fab fa-instagram"></i>
+          <span>Instagram</span>
+          
+        </div>
+        <div class="social-item" data-url="https://www.youtube.com">
+          <i class="fab fa-youtube"></i>
+          <span>YouTube</span>
+           
+        </div>
+        <div class="social-item" data-url="https://www.whatsapp.com">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+           
+        </div>
+        <!-- Duplicate for seamless scroll -->
+        <div class="social-item" data-url="https://www.amazon.com">
+          <i class="fab fa-amazon"></i>
+          <span>Amazon</span>
+           
+        </div>
+        <div class="social-item" data-url="https://www.microsoft.com">
+          <i class="fab fa-microsoft"></i>
+          <span>Microsoft</span>
+          
+        </div>
+        <div class="social-item" data-url="https://www.facebook.com">
+          <i class="fab fa-facebook"></i>
+          <span>Facebook</span>
+          
+        </div>
+        <div class="social-item" data-url="https://x.com">
+          <i class="fab fa-x-twitter"></i>
+          <span>Twitter</span>
+           
+        </div>
+        <div class="social-item" data-url="https://linkedin.com/in/abhinav-pandey-b499532b5">
+          <i class="fab fa-linkedin"></i>
+          <span>LinkedIn</span>
+          
+        </div>
+        <div class="social-item" data-url="https://github.com/Abhinav1901498">
+          <i class="fab fa-github"></i>
+          <span>GitHub</span>
+         
+        </div>
+        <div class="social-item" data-url="https://t.me/abhinav1901498">
+          <i class="fab fa-telegram"></i>
+          <span>Telegram</span>
+          <button class="social-btn telegram">Visit Telegram</button>
+        </div>
+        <div class="social-item" data-url="https://www.instagram.com">
+          <i class="fab fa-instagram"></i>
+          <span>Instagram</span>
+          
+        </div>
+        <div class="social-item" data-url="https://www.youtube.com">
+          <i class="fab fa-youtube"></i>
+          <span>YouTube</span>
+           
+        </div>
+        <div class="social-item" data-url="https://www.whatsapp.com">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+           
+        </div>
+      </div>
+    </div>
+</section>
+
+<style>
+.social-section {
+  padding: 40px 40px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #e0e0e0;
+  text-align: center;
+  font-family: 'Roboto Mono', monospace;
+}
+
+ 
+
+.social-container {
+  overflow: hidden;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.social-scroller {
+  display: inline-flex;
+  animation: scroll 20s linear infinite;
+  will-change: transform;
+}
+
+.social-scroller:hover {
+  animation-play-state: paused;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.social-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 255, 136, 0.2);
+}
+
+.social-item i {
+  font-size: 2.5rem;
+  margin-right: 15px;
+  color: #00ff88;
+  transition: color 0.3s ease;
+}
+
+.social-item span {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+ /* Platform-specific button colors */
+.amazon { background: #ff9900; }
+.amazon:hover { background: #e68a00; }
+.microsoft { background: #00a1f1; }
+.microsoft:hover { background: #0088cc; }
+.facebook { background: #1877f2; }
+.facebook:hover { background: #1566c9; }
+.twitter { background: #1da1f2; }
+.twitter:hover { background: #1890d7; }
+.linkedin { background: #0077b5; }
+.linkedin:hover { background: #00669c; }
+.github { background: #24292e; }
+.github:hover { background: #1c2024; }
+.telegram { background: #0088cc; }
+.telegram:hover { background: #0077b3; }
+.instagram { background: #e1306c; }
+.instagram:hover { background: #c1355c; }
+.youtube { background: #ff0000; }
+.youtube:hover { background: #cc0000; }
+.whatsapp { background: #25d366; }
+.whatsapp:hover { background: #20b858; }
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .social-item {
+    min-width: 150px;
+    padding: 10px;
+  }
+  .social-item i { font-size: 1.5rem; }
+  .social-item span { font-size: 1rem; }
+  .social-btn { padding: 6px 10px; font-size: 0.9rem; }
+}
+</style>
+
+<script>
+document.querySelectorAll('.social-item').forEach(item => {
+  item.addEventListener('click', () => {
+    window.open(item.getAttribute('data-url'), '_blank');
+  });
+});
+</script>
+
+ <!-- Projects Section -->
+        <section class="project-section" id="projects">
+            <h2>🚀 My Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <img src="https://img.icons8.com/ios-filled/100/spam.png" alt="Spam Detection">
+                    <h3>Spam Email Detection</h3>
+                    <p>Detects spam emails using NLP and machine learning models for enhanced email security.</p>
+                    <button onclick="window.open('https://www.kaggle.com/', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer;">About project</button>
+                </div>
+                <div class="project-card">
+                    <img src="https://img.icons8.com/fluency/96/artificial-intelligence.png" alt="AI Career Guidance">
+                    <h3>AI-Driven Career Counseling</h3>
+                    <p>An AI-powered tool that suggests career paths based on user skills and interests.</p>
+                    <button onclick="window.open('https://www.mindgroom.com/', '_blank')" style="margin-top: 5px; padding: 5px 10px; background-color: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer;">About project</button>
+                    <br><br>
+                    <a href="https://github.com/Abhinav1901498/AI-Driven-Career--Counseling-Guidance-" target="_blank" class="btn-view">View on GitHub</a>
+                </div>
+                <div class="project-card">
+                    <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/100/000000/external-portfolio-resume-flaticons-flat-flat-icons.png" alt="Portfolio Website">
+                    <h3>Portfolio</h3>
+                    <p>A responsive portfolio showcasing my skills using HTML, CSS, and Tailwind CSS.</p>
+                    <a href="https://github.com/Abhinav1901498/Portfolio-" target="_blank" class="btn-view">View on GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section class="certificates-section" id="certificates">
+            <h2>📜 Certificates</h2>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h4>Web Development</h4>
+                    <p>Completed a 2-month internship on modern web technologies including HTML, CSS.</p>
+                    <a href="https://drive.google.com/file/d/1Juh_3SC8eAP2HkQtLnEY2NEYhVVsrVQ8/view?usp=drive_link" class="cert-button" target="_blank">View Certificate</a>
+                </div>
+                <div class="cert-card">
+                    <i class="fas fa-brain"></i>
+                    <h4>AI Agent For Beginners</h4>
+                    <p>Demonstrated initiative in deepening AI skills and advancing career growth.</p>
+                    <a href="https://drive.google.com/file/d/1A6a88VgQMGmjSQ7NK9L4vdm4UnWWBgag/view?usp=drive_link" class="cert-button" target="_blank">View Certificate</a>
+                </div>
+                <div class="cert-card">
+                    <i class="fas fa-rocket"></i>
+                    <h4>Technology Job Simulation</h4>
+                    <p>Successfully completed Deloitte Technology Job Simulation certificate.</p>
+                    <a href="https://drive.google.com/file/d/1OYhgPQTyQ9vM4-A6sK02sHywAmOEpAbl/view?usp=drive_link" class="cert-button" target="_blank">View Certificate</a>
+                </div>
+                <div class="cert-card">
+                    <i class="fas fa-database"></i>
+                    <h4>HackerRank SQL (Basic)</h4>
+                    <p>Completed HackerRank SQL (Basic) certification, showcasing database skills.</p>
+                    <a href="https://drive.google.com/file/d/16GM48QMwm4eo3Bt-5WL9VnnOo7fqO6P6/view?usp=drive_link" class="cert-button" target="_blank">View Certificate</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h3>Contact Me</h3>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <img src="https://img.icons8.com/fluency/96/gmail-new.png" alt="Email">
+                    <h4>Email</h4>
+                    <p><a href="mailto:pandeyabhi3150@gmail.com">pandeyabhi3150@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <img src="https://img.icons8.com/fluency/96/github.png" alt="GitHub">
+                    <h4>GitHub</h4>
+                    <p><a href="https://github.com/Abhinav1901498" target="_blank">Abhinav1901498</a></p>
+                </div>
+                <div class="contact-card">
+                    <img src="https://img.icons8.com/fluency/96/linkedin.png" alt="LinkedIn">
+                    <h4>LinkedIn</h4>
+                    <p><a href="https://linkedin.com/in/abhinav-pandey-b499532b5" target="_blank">abhinav-pandey-b499532b5</a></p>
+                </div>
+                <div class="contact-card">
+                    <img src="https://img.icons8.com/fluency/96/whatsapp.png" alt="WhatsApp">
+                    <h4>WhatsApp</h4>
+                    <p><a href="https://wa.me/9580363258" target="_blank">9580363258</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get in Touch Section -->
+        <section id="get-in-touch" class="get-in-touch-section">
+            <h3>Get in Touch</h3>
+            <form class="get-in-touch-form" id="get-in-touch-form">
+                <div class="form-row">
+                    <input type="text" name="first-name" placeholder="First Name" required>
+                    <input type="text" name="last-name" placeholder="Last Name" required>
+                </div>
+                <div class="form-row">
+                    <input type="tel" name="phone" placeholder="Your Phone Number" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025 Abhinav Pandey. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://github.com/Abhinav1901498" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/abhinav-pandey-b499532b5" target="_blank">LinkedIn</a>
+                <a href="https://wa.me/9580363258" target="_blank">WhatsApp</a>
+            </div>
+        </footer>
+
+        <!-- Scroll to Top Button -->
+        <div class="scroll-to-top" id="scrollToTop">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        const chars = '01ABCDEF';
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(20, 30, 48, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ffe7';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.97) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 40);
+
+        window.addEventListener('resize', () => {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+        });
+
+        // Initialize ScrollReveal
+        ScrollReveal({ reset: false, distance: '60px', duration: 1000, delay: 200 });
+
+        // Portfolio Animations
+        ScrollReveal().reveal('.navbar-brand', { origin: 'top', distance: '60px', duration: 1000, delay: 200 });
+        ScrollReveal().reveal('.navbar-links a', { origin: 'top', distance: '60px', duration: 1000, delay: 300, interval: 100 });
+        ScrollReveal().reveal('#home-text .typing', { origin: 'left', distance: '60px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('#home-text h1', { origin: 'left', distance: '60px', duration: 1200, delay: 300 });
+        ScrollReveal().reveal('#home-text p', { origin: 'left', distance: '60px', duration: 1200, delay: 400 });
+        ScrollReveal().reveal('#home-text .flex', { origin: 'left', distance: '60px', duration: 1200, delay: 500 });
+        ScrollReveal().reveal('#home-text button', { origin: 'bottom', distance: '60px', duration: 1200, delay: 600, interval: 100 });
+        ScrollReveal().reveal('#home-image', { origin: 'right', distance: '60px', duration: 1200, delay: 400 });
+        ScrollReveal().reveal('.about-img', { origin: 'left', distance: '80px', duration: 1500, delay: 300 });
+        ScrollReveal().reveal('.about-text h2', { origin: 'right', distance: '80px', duration: 1500, delay: 400 });
+        ScrollReveal().reveal('.about-text p', { origin: 'right', distance: '80px', duration: 1500, delay: 500 });
+        ScrollReveal().reveal('.social-buttons .social-button', { origin: 'right', distance: '80px', duration: 1500, delay: 600, interval: 100 });
+        ScrollReveal().reveal('.skills-section h2', { origin: 'top', distance: '50px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('.skill-item', { origin: 'bottom', distance: '50px', duration: 1200, delay: 300, interval: 100 });
+        ScrollReveal().reveal('.skill-item i', { origin: 'bottom', distance: '50px', duration: 1200, delay: 400 });
+        ScrollReveal().reveal('.skill-item span', { origin: 'bottom', distance: '50px', duration: 1200, delay: 500 });
+        ScrollReveal().reveal('.skill-item button', { origin: 'bottom', distance: '50px', duration: 1200, delay: 600 });
+        ScrollReveal().reveal('.project-section h2', { origin: 'top', distance: '50px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('.project-card', { origin: 'left', distance: '50px', duration: 1200, delay: 300, interval: 100 });
+        ScrollReveal().reveal('.project-card img', { origin: 'left', distance: '50px', duration: 1200, delay: 400 });
+        ScrollReveal().reveal('.project-card h3', { origin: 'left', distance: '50px', duration: 1200, delay: 500 });
+        ScrollReveal().reveal('.project-card p', { origin: 'left', distance: '50px', duration: 1200, delay: 600 });
+        ScrollReveal().reveal('.project-card button, .project-card .btn-view', { origin: 'left', distance: '50px', duration: 1200, delay: 700 });
+        ScrollReveal().reveal('.certificates-section h2', { origin: 'top', distance: '50px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('.cert-card', { origin: 'right', distance: '50px', duration: 1200, delay: 300, interval: 100 });
+        ScrollReveal().reveal('.cert-card i', { origin: 'right', distance: '50px', duration: 1200, delay: 400 });
+        ScrollReveal().reveal('.cert-card h4', { origin: 'right', distance: '50px', duration: 1200, delay: 500 });
+        ScrollReveal().reveal('.cert-card p', { origin: 'right', distance: '50px', duration: 1200, delay: 600 });
+        ScrollReveal().reveal('.cert-button', { origin: 'right', distance: '50px', duration: 1200, delay: 700 });
+        ScrollReveal().reveal('#contact h3', { origin: 'top', distance: '50px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('.contact-card', { origin: 'bottom', distance: '50px', duration: 1200, delay: 300, interval: 100 });
+        ScrollReveal().reveal('.contact-card img', { origin: 'bottom', distance: '50px', duration: 1200, delay: 400 });
+        ScrollReveal().reveal('.contact-card h4', { origin: 'bottom', distance: '50px', duration: 1200, delay: 500 });
+        ScrollReveal().reveal('.contact-card p', { origin: 'bottom', distance: '50px', duration: 1200, delay: 600 });
+        ScrollReveal().reveal('.get-in-touch-section h3', { origin: 'top', distance: '50px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('.get-in-touch-form', { origin: 'bottom', distance: '80px', duration: 1500, delay: 300 });
+        ScrollReveal().reveal('.get-in-touch-form input, .get-in-touch-form textarea', { origin: 'bottom', distance: '80px', duration: 1500, delay: 400, interval: 100 });
+        ScrollReveal().reveal('.get-in-touch-form button', { origin: 'bottom', distance: '80px', duration: 1500, delay: 500 });
+        ScrollReveal().reveal('.footer p', { origin: 'bottom', distance: '50px', duration: 1200, delay: 200 });
+        ScrollReveal().reveal('.footer-links a', { origin: 'bottom', distance: '50px', duration: 1200, delay: 300, interval: 100 });
+
+        // Typing Animation
+        const typingText = document.querySelector('.typing');
+        const phrases = ['Welcome to my portfolio', 'Hi, I\'m Abhinav ',    ' Building future ', 'Coding with Passion'];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            if (!isDeleting) {
+                typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex > currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(type, 1500);
+                    return;
+                }
+            } else {
+                typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex < 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                }
+            }
+            setTimeout(type, isDeleting ? 50 : 100);
+        }
+
+        // Start typing animation on page load
+        setTimeout(type, 1000);
+
+        // Smooth scrolling for navbar links
+        document.querySelectorAll('.navbar-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const section = document.querySelector(this.getAttribute('href'));
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Get in Touch form submission (mock)
+        document.getElementById('get-in-touch-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = this.querySelector('input[name="first-name"]').value;
+            alert(`Thank you, ${name}! Your details have been submitted.`);
+            this.reset();
+        });
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
