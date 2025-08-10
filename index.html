@@ -21,7 +21,7 @@
         }
 
         body {
-            background: linear-gradient(145deg, #141e30, #243b55);
+            background: darkcyan;
             color: #fff;
             min-height: 100vh;
             position: relative;
@@ -81,7 +81,7 @@
         }
 
         /* Home Section */
-        #home-image {
+       #home-image {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -104,6 +104,7 @@
             box-shadow: 0 40px 60px rgba(0, 255, 231, 0.4);   
         }
 
+
         .typing {
             font-size: 1.875rem;
             font-weight: 700;
@@ -122,14 +123,7 @@
         @keyframes blink {
             50% { border-color: transparent }
         }
-
-
-
-
-        
-
-  
-        
+         
         /* Skills Section */
         .skills-section {
             padding: 5rem 2rem;
@@ -570,7 +564,7 @@
     <div class="portfolio-content" id="portfolio-content">
         <!-- Navbar -->
         <nav class="navbar">
-            <a href="#home" class="navbar-brand">Portfolio</a>
+            <a href="#home" class="navbar-brand"> Portfolio</a>
             <div class="navbar-links">
                 <a href="#home">Home</a>
                 <a href="#about">About Me</a>
@@ -578,39 +572,38 @@
             </div>
         </nav>
 
-        <!-- Home Section -->
+         <!-- Home Section -->
         <section id="home" class="min-h-screen pt-3 pb-3 px-2 flex items-center">
             <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
                 <!-- Home Text Content -->
                 <div class="space-y-2" id="home-text">
-                    <h2 class="typing">Hi, I'm Abhinav <br>Welcome to my portfolio</h2>
+                    <h2 class="typing">Hi, I'm Abhinav <br>Web Developer</h2>
                     <h1 class="text-2xl md:text-3xl font-semibold text-cyan-400">Web Developer & AI Enthusiast</h1>
                     <p class="text-xl text-gray-300">Passionate about crafting responsive websites and leveraging AI to solve real-world problems.</p>
                     <div class="flex space-x-4 mt-4">
+                       <button onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })" class="bg-gray-700 text-xl text-white px-4 py-2 rounded hover:bg-white hover:text-black hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">Download Resume</button>
                         <button onclick="document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })" class="bg-cyan-500 text-xl text-black px-4 py-2 rounded hover:bg-white hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">View Skills</button>
                         <button onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })" class="bg-gray-700 text-xl text-white px-4 py-2 rounded hover:bg-white hover:text-black hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">View Projects</button>
                     </div>
                 </div>
                     <!-- Home Image -->
                 <div id="home-image">
-                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFJ23yP0L0S8g/profile-displayphoto-scale_200_200/B56Zhvae9IHQAY-/0/1754215870903?e=1757548800&v=beta&t=N8rJrnWLNJ6gazM3x5U9b2DWtLgIWhy_jFOzOnFKieo" 
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQEPpdbsSjUXcQ/profile-displayphoto-scale_200_200/B56ZiVTALoHUAc-/0/1754851444480?e=1757548800&v=beta&t=ryyOSXmsO1WCH-lgoxgjq4Ap0adGIiLXa08exFKv15w" 
                     alt="Abhinav Pandey">
                 </div>
             </div>
          </section>
 
-          
-        
-          
-         <!-- about section -->
-           <section class="about-section" id="about">
-    <div class="about-container">
+         <!-- About section -->
+          <section class="about-section" id="about">
+          <div class="about-container">
         <div class="about-image">
-            <img src="https://media.licdn.com/dms/image/v2/D5603AQFJ23yP0L0S8g/profile-displayphoto-scale_200_200/B56Zhvae9IHQAY-/0/1754215870903?e=1756944000&v=beta&t=YfpyIeU1ARYtHLASsmkDnlVosBS7exKI1i0XJwHnzT4" alt="Abhinav Pandey">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQEPpdbsSjUXcQ/profile-displayphoto-scale_200_200/B56ZiVTALoHUAc-/0/1754851444480?e=1757548800&v=beta&t=ryyOSXmsO1WCH-lgoxgjq4Ap0adGIiLXa08exFKv15w" 
+            alt="Abhinav Pandey">
         </div>
         <div class="about-content">
             <h2 class="animated-text">About Me</h2>
-            <p class="animated-text">I'm Abhinav Pandey, a passionate developer with a knack for creating innovative solutions. With expertise in web development and a love for clean code, I build projects that blend functionality with aesthetic appeal. Connect with me to explore my work or collaborate on exciting ideas!</p>
+            <p>I'm Abhinav Pandey, a passionate developer with a knack for creating innovative solutions. With expertise in web development and a love for clean code, I build projects that blend functionality with aesthetic appeal. Connect with me to explore my work or collaborate on exciting ideas!</p>
         </div>
     </div>
 </section>
@@ -647,7 +640,7 @@
 
 .about-image img.visible {
   opacity: 1;
-  animation: pulse 2s ease-in-out infinite;
+   
 }
 
 .about-image img:hover {
@@ -1227,7 +1220,7 @@ document.querySelectorAll('.social-item').forEach(item => {
 
         // Typing Animation
         const typingText = document.querySelector('.typing');
-        const phrases = ['Welcome to my portfolio', 'Hi, I\'m Abhinav ',    ' Building future ', 'Coding with Passion'];
+        const phrases = ['Hi, I\'m Abhinav ', 'Web Developer',  ' Building future ', 'Coding with Passion'];
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
