@@ -21,7 +21,7 @@
         }
 
         body {
-            background: darkcyan;
+            
             color: #fff;
             min-height: 100vh;
             position: relative;
@@ -91,8 +91,8 @@
         }
 
         #home-image img {
-            width: 370px;
-            height: 450px;
+            width: 600px;
+            height: 500px;
             transform: rotateY(-10deg) rotateX(5deg);
             box-shadow: 0 30px 40px rgba(0, 255, 231, 0.3);
             border-radius: 20px;
@@ -523,7 +523,7 @@
             }
 
             .navbar-links {
-                gap: 1rem;
+                gap: 0.5rem;
             }
 
             .navbar-links a {
@@ -572,33 +572,95 @@
             </div>
         </nav>
 
-         <!-- Home Section -->
-        <section id="home" class="min-h-screen pt-3 pb-3 px-2 flex items-center">
-            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
-                <!-- Home Text Content -->
-                <div class="space-y-2" id="home-text">
-                    <h2 class="typing">Hi, I'm Abhinav <br>Web Developer</h2>
-                    <h1 class="text-2xl md:text-3xl font-semibold text-cyan-400">Web Developer & AI Enthusiast</h1>
-                    <p class="text-xl text-gray-300">Passionate about crafting responsive websites and leveraging AI to solve real-world problems.</p>
-                    <div class="flex space-x-4 mt-4">
-                       <button onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })" class="bg-gray-700 text-xl text-white px-4 py-2 rounded hover:bg-white hover:text-black hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">Download Resume</button>
-                        <button onclick="document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })" class="bg-cyan-500 text-xl text-black px-4 py-2 rounded hover:bg-white hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">View Skills</button>
-                        <button onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })" class="bg-gray-700 text-xl text-white px-4 py-2 rounded hover:bg-white hover:text-black hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">View Projects</button>
-                    </div>
-                </div>
-                    <!-- Home Image -->
-                <div id="home-image">
-                    <img src="https://media.licdn.com/dms/image/v2/D5603AQEPpdbsSjUXcQ/profile-displayphoto-scale_200_200/B56ZiVTALoHUAc-/0/1754851444480?e=1757548800&v=beta&t=ryyOSXmsO1WCH-lgoxgjq4Ap0adGIiLXa08exFKv15w" 
-                    alt="Abhinav Pandey">
-                </div>
-            </div>
-         </section>
 
-         <!-- About section -->
+        
+<!-- Hero Section -->
+<article> 
+  <section class="bg-linear-to-tl from-blue-500 to-black-500">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 h-screen md:h-[70vh] p-4">
+      <div class="my-auto text-center md:text-left">
+        <h1 class="text-3xl md:text-3xl font-bold px-18">
+          <span id="line1"></span><br>
+          <span id="line2"></span>
+        </h1>
+        <br>
+        <p class="text-2xl px-18">
+          <span id="line3"></span><br>
+          <span id="line4"></span><br>
+          <span id="line5"></span>
+        </p>
+        <br>
+        <div class="flex gap-4 justify-center md:justify-start">
+          <button onclick="document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })" 
+          class="bg-cyan-500 text-xl text-black px-4 py-2 rounded hover:bg-white hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">
+          View Skills</button>
+          <button onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })" 
+          class="bg-gray-700 text-xl text-white px-4 py-2 rounded hover:bg-white hover:text-black hover:shadow-[0_0_10px_rgba(0,255,231,0.7)]">
+          View Projects</button>
+        </div>
+      </div>
+      <div class="my-auto">
+        <img src="https://bloomzeninfosolutions.com/image/what-full-stack.png" 
+        alt="">   
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .cursor {
+      display: inline;
+      animation: blink 0.75s step-end infinite;
+    }
+  </style>
+
+  <script>
+    const lines = [
+      {id: 'line1', text: "Hi I'm Abhianv Pandey"},
+      {id: 'line2', text: "Web Developer"},
+      {id: 'line3', text: "Passionate about crafting"},
+      {id: 'line4', text: "responsive websites & AI to solve"},
+      {id: 'line5', text: "real-world problems."}
+    ];
+
+    let currentLine = 0;
+
+    function typeLine() {
+      if (currentLine >= lines.length) return;
+
+      const {id, text} = lines[currentLine];
+      const element = document.getElementById(id);
+      let i = 0;
+
+      function typeChar() {
+        if (i < text.length) {
+          element.innerHTML = text.substring(0, i + 1) + '<span class="cursor">|</span>';
+          i++;
+          setTimeout(typeChar, 50);
+        } else {
+          element.innerHTML = text; // remove cursor
+          currentLine++;
+          setTimeout(typeLine, 300); // delay before next line
+        }
+      }
+
+      typeChar();
+    }
+
+    window.addEventListener('load', typeLine);
+  </script>
+</article>
+         
+
+
+
+  <!-- About section -->
           <section class="about-section" id="about">
           <div class="about-container">
         <div class="about-image">
-            <img src="https://media.licdn.com/dms/image/v2/D5603AQEPpdbsSjUXcQ/profile-displayphoto-scale_200_200/B56ZiVTALoHUAc-/0/1754851444480?e=1757548800&v=beta&t=ryyOSXmsO1WCH-lgoxgjq4Ap0adGIiLXa08exFKv15w" 
+            <img src="https://png.pngtree.com/png-vector/20240805/ourmid/pngtree-freelancer-software-developer-programmer-coder-illustrator-png-image_13076689.png" 
             alt="Abhinav Pandey">
         </div>
         <div class="about-content">
@@ -628,7 +690,7 @@
 }
 
 .about-image img {
-  width: 300px;
+  width: 320px;
   height: 300px;
   border-radius: 50%;
   object-fit: cover;
@@ -669,7 +731,7 @@
 .about-content p {
   font-size: 1.1rem;
   line-height: 2;
-   color: #c0c0c0;
+   color: black;
   background: rgba(255, 255, 255, 0.05);
   padding: 30px;
   border-radius: 10px;
@@ -1218,12 +1280,23 @@ document.querySelectorAll('.social-item').forEach(item => {
         ScrollReveal().reveal('.footer p', { origin: 'bottom', distance: '50px', duration: 1200, delay: 200 });
         ScrollReveal().reveal('.footer-links a', { origin: 'bottom', distance: '50px', duration: 1200, delay: 300, interval: 100 });
 
+
+
+
         // Typing Animation
         const typingText = document.querySelector('.typing');
         const phrases = ['Hi, I\'m Abhinav ', 'Web Developer',  ' Building future ', 'Coding with Passion'];
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
+
+
+
+
+
+
+
+
 
         function type() {
             const currentPhrase = phrases[phraseIndex];
